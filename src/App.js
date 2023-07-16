@@ -1,11 +1,11 @@
 import React from 'react';
 
 
-import RedButton from './components/redButton';
+import Tela from './components/telaVazia';
 
 const App = () => {
   return (
-    <RedButton />
+    <Tela />
   );
 };
 

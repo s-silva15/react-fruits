@@ -2,7 +2,7 @@ import React from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 
-function RedButton() {
+function Tela() {
   return (
     <div style={style.containerStyle}>
       <span style={style.spanStyle}>Cadastre sua primeira fruta.</span>
@@ -14,7 +14,7 @@ function RedButton() {
   );
 }
 
-export default RedButton;
+export default Tela;
 
 const style = {
   spanStyle: {
