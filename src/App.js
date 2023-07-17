@@ -1,11 +1,11 @@
 import React from 'react';
 
 
-import Form from './components/form';
+import Tela from './components/form/telaSucesso';
 
 const App = () => {
   return (
-    <Form />
+    <Tela />
   );
 };
 
