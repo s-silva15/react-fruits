@@ -1,9 +1,16 @@
 import React from 'react';
 import { IoCloseOutline } from 'react-icons/io5';
+import { useNavigate, Link } from 'react-router-dom';
 
 import cadastroImage from '../assets/cadastroSucesso.png';
 
-const Sucesso = ({ onAddFruit }) => {
+const Sucesso = () => {
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    navigate('/form/telaSucesso');
+  };
+
   return (
     <div style={styles.container}>
       <div style={styles.gridContainer}>
@@ -15,16 +22,12 @@ const Sucesso = ({ onAddFruit }) => {
         <p style={styles.paragraph}>
           Você cadastrou a fruta Lorem com sucesso!
         </p>
-        <button style={styles.button} onClick={handleClick}>
+        <Link to={'/inicio'} style={styles.button} onClick={handleClick}>
           Voltar ao início
-        </button>
+        </Link>
       </div>
     </div>
   );
-};
-
-const handleClick = () => {
-  // Lógica do botão Voltar ao início
 };
 
 const styles = {
@@ -57,10 +60,10 @@ const styles = {
     color: 'darkslategray',
   },
   button: {
-    fontSize: '16px',
+    fontSize: '20px',
     display: 'flex',
     width: '328px',
-    height: '40px',
+    height: '30px',
     padding: '8px 24px 8px 16px',
     justifyContent: 'center',
     alignItems: 'center',

@@ -2,13 +2,14 @@ import React, { useState, useEffect } from 'react';
 import { IoCloseOutline } from 'react-icons/io5';
 import { HiOutlinePlusSm } from 'react-icons/hi';
 import { v4 as uuidv4 } from 'uuid';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 
 function Form() {
   const [name, setName] = useState('');
   const [price, setPrice] = useState('');
   const [quantity, setQuantity] = useState('');
   const { uuid } = useParams();
+  const navigate = useNavigate();
 
   const currentURL = window.location.href;
   const tipo = currentURL.split('/form')[1].split('/')[1];
@@ -58,10 +59,7 @@ function Form() {
     }
 
     localStorage.setItem('myArray', JSON.stringify(parsedData));
-
-    setName('');
-    setPrice('');
-    setQuantity('');
+    navigate('/form/telaSucesso');
   }
 
   return (
