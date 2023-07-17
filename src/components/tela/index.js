@@ -3,6 +3,8 @@ import frutas from '../data/mock.js';
 import { IoCashOutline, IoCogOutline, IoCloseOutline, IoPencil } from 'react-icons/io5';
 import { CiSearch } from 'react-icons/ci';
 import { BsTrash3 } from 'react-icons/bs';
+import { Link } from 'react-router-dom';
+
 
 const FruitList = () => {
   const [searchTerm, setSearchTerm] = useState('');
@@ -88,9 +90,9 @@ const FruitList = () => {
                 onClick={handleCloseModal}
               />
               <div>
-                <a href="#" style={style.linkStyle}>
+                <Link to="/form/editar" style={style.linkStyle}>
                   <IoPencil style={{ marginRight: '5%' }} /> Editar Fruta
-                </a>
+                </Link>
               </div>
               <div>
                 <a href="#" style={style.linkStyle}>
@@ -206,7 +208,7 @@ const style = {
     width: '120px',
     zIndex: 1000, // Ajuste o valor do zIndex conforme necessário
   },
-  
+
 
 
   linkStyle: {

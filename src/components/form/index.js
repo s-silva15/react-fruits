@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import { IoCloseOutline } from 'react-icons/io5';
-
+import { useParams } from 'react-router-dom';
 
 const Form = ({ onAddFruit }) => {
   const [name, setName] = useState('');
   const [price, setPrice] = useState('');
   const [quantity, setQuantity] = useState('');
 
+  const { tipo } = useParams();
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -34,13 +35,10 @@ const Form = ({ onAddFruit }) => {
 
   return (
     <div style={style.listContainerStyle}>
-      <div style={{ display: "grid", gridGap: "15px", padding: '5%' }}>
-
+      <div style={{ display: 'grid', gridGap: '15px', padding: '5%' }}>
         <div style={style.titleContainer}>
-          <h2 style={style.title}>Ação Fruta</h2>
-          <IoCloseOutline
-            style={style.closeIcon}
-             />
+          <h2 style={style.title}>{tipo.charAt(0).toUpperCase() + tipo.slice(1)} Fruta</h2>
+          <IoCloseOutline style={style.closeIcon} />
         </div>
         <form onSubmit={handleSubmit}>
           <div style={style.cardStyle}>
@@ -73,9 +71,7 @@ const Form = ({ onAddFruit }) => {
               onChange={(e) => setQuantity(e.target.value)}
             />
           </div>
-          <button style={style.buttonStyle}>
-            Cadastrar fruta
-          </button>
+          <button style={style.buttonStyle}>Cadastrar fruta</button>
         </form>
       </div>
     </div>

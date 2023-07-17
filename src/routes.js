@@ -2,6 +2,7 @@ import {BrowserRouter as Router, Routes, Route} from "react-router-dom";
 
 import TelaVazia from '../src/components/telaVazia';
 import Tela from '../src/components/tela';
+import Form from '../src/components/form';
 
 export default function AppRouter() {
     return (
@@ -9,6 +10,7 @@ export default function AppRouter() {
             <Routes>
                 <Route path="/" element={<TelaVazia/>}/>;
                 <Route path="/inicio" element={<Tela/>}/>;
+                <Route path="/form/:tipo" element={<Form/>}/>;
             </Routes>
         </Router>
     );

@@ -1,17 +1,19 @@
 import React from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
+import { Link } from 'react-router-dom';
 
 function Tela() {
   return (
     <div style={style.containerStyle}>
       <span style={style.spanStyle}>Cadastre sua primeira fruta.</span>
-      <button style={style.buttonStyle}>
+      <Link to="/form/novo" style={style.buttonStyle}>
         <FontAwesomeIcon icon={faPlus} style={style.iconStyle} />
         Cadastrar fruta
-      </button>
+      </Link>
     </div>
   );
+  
 }
 
 export default Tela;
@@ -19,14 +21,14 @@ export default Tela;
 const style = {
   spanStyle: {
     color: "black",
-    fontSize: "16px",
-    marginBottom: '10px',
+    fontSize: "20px",
+    marginBottom: '10px'
   },
   buttonStyle: {
     fontSize: "16px",
     display: 'flex',
-    width: '328px',
-    height: '40px',
+    width: '320px',
+    height: '30px',
     padding: '8px 24px 8px 16px',
     justifyContent: 'center',
     alignItems: 'center',
@@ -49,4 +51,3 @@ const style = {
     backgroundColor: 'white',
   }
 };
-
