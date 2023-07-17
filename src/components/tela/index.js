@@ -1,42 +1,51 @@
-import React, { useState, useRef } from 'react';
-import frutas from '../data/mock.js';
+import React, { useState, useRef, useEffect } from 'react';
 import { IoCashOutline, IoCogOutline, IoCloseOutline, IoPencil } from 'react-icons/io5';
 import { CiSearch } from 'react-icons/ci';
 import { BsTrash3 } from 'react-icons/bs';
 import { Link } from 'react-router-dom';
+import { v4 as uuidv4 } from 'uuid';
 
-
-const FruitList = () => {
+function FruitList() {
   const [searchTerm, setSearchTerm] = useState('');
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [myArray, setMyArray] = useState([]);
+  const [selectedFruitId, setSelectedFruitId] = useState('');
+
   const modalRef = useRef(null);
 
-  const handleSearch = (event) => {
+  useEffect(() => {
+    const savedData = localStorage.getItem('myArray');
+    if (savedData) {
+      setMyArray(JSON.parse(savedData));
+    }
+  }, []);
+
+  function handleSearch(event) {
     setSearchTerm(event.target.value);
-  };
+  }
 
-  const handleOpenModal = () => {
+  function handleOpenModal(fruitId) {
+    setSelectedFruitId(fruitId);
     setIsModalOpen(true);
-  };
+  }
 
-  const handleCloseModal = () => {
+  function handleCloseModal() {
     setIsModalOpen(false);
-  };
+  }
 
-  const handleOverlayClick = (event) => {
+  function handleOverlayClick(event) {
     if (event.target === modalRef.current) {
       setIsModalOpen(false);
     }
-  };
+  }
 
-  const filteredFrutas = frutas.filter((fruta) =>
-    fruta.nome_fruta.toLowerCase().includes(searchTerm.toLowerCase())
+  const filteredFrutas = myArray.filter((fruta) =>
+    fruta.nome_fruta && fruta.nome_fruta.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
   return (
     <div style={style.listContainerStyle}>
-      <div style={{ display: "grid", gridGap: "15px", padding: '5%' }}>
-
+      <div style={{ display: 'grid', gridGap: '15px', padding: '5%' }}>
         <div style={style.cardStyleSearch}>
           <CiSearch style={style.iconStyle} />
           <input
@@ -54,7 +63,7 @@ const FruitList = () => {
               <span style={{ fontWeight: 'bold', flex: 1 }}>{fruta.nome_fruta}</span>
               <IoCogOutline
                 style={{ color: 'red', fontSize: 40, cursor: 'pointer' }}
-                onClick={handleOpenModal}
+                onClick={() => handleOpenModal(fruta.id)}
               />
             </div>
 
@@ -90,7 +99,7 @@ const FruitList = () => {
                 onClick={handleCloseModal}
               />
               <div>
-                <Link to="/form/editar" style={style.linkStyle}>
+                <Link to={`/form/editar/${selectedFruitId}`} style={style.linkStyle}>
                   <IoPencil style={{ marginRight: '5%' }} /> Editar Fruta
                 </Link>
               </div>
@@ -103,17 +112,11 @@ const FruitList = () => {
           </div>
         </>
       )}
-
-
-
-
     </div>
   );
-};
-
+}
 
 export default FruitList;
-
 const style = {
   pFruit: {
     fontSize: '12px',

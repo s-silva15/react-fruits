@@ -7,13 +7,12 @@ function Tela() {
   return (
     <div style={style.containerStyle}>
       <span style={style.spanStyle}>Cadastre sua primeira fruta.</span>
-      <Link to="/form/novo" style={style.buttonStyle}>
+      <Link to="/form/cadastrar" style={style.buttonStyle}>
         <FontAwesomeIcon icon={faPlus} style={style.iconStyle} />
         Cadastrar fruta
       </Link>
     </div>
   );
-  
 }
 
 export default Tela;

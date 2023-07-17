@@ -1,43 +1,74 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { IoCloseOutline } from 'react-icons/io5';
+import { HiOutlinePlusSm } from 'react-icons/hi';
+import { v4 as uuidv4 } from 'uuid';
 import { useParams } from 'react-router-dom';
 
-const Form = ({ onAddFruit }) => {
+function Form() {
   const [name, setName] = useState('');
   const [price, setPrice] = useState('');
   const [quantity, setQuantity] = useState('');
+  const { uuid } = useParams();
 
-  const { tipo } = useParams();
-  const handleSubmit = (e) => {
+  const currentURL = window.location.href;
+  const tipo = currentURL.split('/form')[1].split('/')[1];
+  const isEditar = tipo === 'editar';
+  const titulo = isEditar ? 'Editar' : 'Cadastrar';
+  const button = isEditar ? 'Atualizar' : 'Cadastrar';
+
+  useEffect(() => {
+    if (isEditar) {
+      const savedData = localStorage.getItem('myArray');
+      if (savedData) {
+        const obj = JSON.parse(savedData).find((obj) => obj.id === uuid);
+        if (obj) {
+          setName(obj.nome_fruta);
+          setPrice(obj.valor);
+          setQuantity(obj.qtd_estoque);
+        }
+      }
+    }
+  }, [isEditar, uuid]);
+
+  function handleSubmit(e) {
     e.preventDefault();
 
-    // Verifique se todos os campos foram preenchidos
     if (!name || !price || !quantity) {
       alert('Por favor, preencha todos os campos');
       return;
     }
 
-    // Crie um objeto de fruta com os dados fornecidos
+    const savedData = localStorage.getItem('myArray');
+    const parsedData = savedData ? JSON.parse(savedData) : [];
+
     const newFruit = {
+      id: isEditar ? uuid : uuidv4(),
       nome_fruta: name,
       valor: parseFloat(price),
       qtd_estoque: parseInt(quantity),
     };
 
-    // Chame a função onAddFruit passando a nova fruta
-    onAddFruit(newFruit);
+    if (isEditar) {
+      const index = parsedData.findIndex((obj) => obj.id === uuid);
+      if (index !== -1) {
+        parsedData[index] = newFruit;
+      }
+    } else {
+      parsedData.push(newFruit);
+    }
 
-    // Limpe os campos do formulário
+    localStorage.setItem('myArray', JSON.stringify(parsedData));
+
     setName('');
     setPrice('');
     setQuantity('');
-  };
+  }
 
   return (
     <div style={style.listContainerStyle}>
       <div style={{ display: 'grid', gridGap: '15px', padding: '5%' }}>
         <div style={style.titleContainer}>
-          <h2 style={style.title}>{tipo.charAt(0).toUpperCase() + tipo.slice(1)} Fruta</h2>
+          <h2 style={style.title}>{titulo} Fruta</h2>
           <IoCloseOutline style={style.closeIcon} />
         </div>
         <form onSubmit={handleSubmit}>
@@ -71,14 +102,19 @@ const Form = ({ onAddFruit }) => {
               onChange={(e) => setQuantity(e.target.value)}
             />
           </div>
-          <button style={style.buttonStyle}>Cadastrar fruta</button>
+          <button style={style.buttonStyle}>
+            <HiOutlinePlusSm style={style.iconStylePlus} />
+            {button} fruta
+          </button>
         </form>
       </div>
     </div>
   );
-};
+}
 
 export default Form;
+
+
 
 const style = {
 
@@ -145,6 +181,10 @@ const style = {
   iconStyle: {
     fontSize: '25px',
     color: 'gray',
+  },
+  iconStylePlus: {
+    fontSize: '25px',
+    color: 'white'
   },
   modalOverlayStyle: {
     position: 'fixed',
