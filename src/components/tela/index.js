@@ -80,39 +80,6 @@ function FruitList() {
           </div>
         ))}
       </div>
-
-      {isModalOpen && (
-        <>
-          <div
-            style={style.modalOverlayStyle}
-            ref={modalRef}
-            onClick={handleOverlayClick}
-          />
-          <div style={style.modalContainerStyle}>
-            <div style={style.modalStyle}>
-              <IoCloseOutline
-                style={{
-                  position: 'absolute',
-                  top: '10px',
-                  right: '10px',
-                  cursor: 'pointer',
-                }}
-                onClick={handleCloseModal}
-              />
-              <div>
-                <Link to={`/form/editar/${selectedFruitId}`} style={style.linkStyle}>
-                  <IoPencil style={{ marginRight: '5%' }} /> Editar Fruta
-                </Link>
-              </div>
-              {/* <div>
-                <a href="#" style={style.linkStyle}>
-                  <BsTrash3 style={{ marginRight: '5%' }} /> Excluir Fruta
-                </a>
-              </div> */}
-            </div>
-          </div>
-        </>
-      )}
     </div>
   );
 }
