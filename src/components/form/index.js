@@ -3,6 +3,8 @@ import { IoCloseOutline } from 'react-icons/io5';
 import { HiOutlinePlusSm } from 'react-icons/hi';
 import { v4 as uuidv4 } from 'uuid';
 import { useParams, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+
 
 function Form() {
   const [name, setName] = useState('');
@@ -67,7 +69,9 @@ function Form() {
       <div style={{ display: 'grid', gridGap: '15px', padding: '5%' }}>
         <div style={style.titleContainer}>
           <h2 style={style.title}>{titulo} Fruta</h2>
-          <IoCloseOutline style={style.closeIcon} />
+          <Link to="/inicio">
+            <IoCloseOutline style={style.closeIcon} />
+          </Link>
         </div>
         <form onSubmit={handleSubmit}>
           <div style={style.cardStyle}>

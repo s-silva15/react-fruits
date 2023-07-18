@@ -3,7 +3,7 @@ import { IoCashOutline, IoCogOutline, IoCloseOutline, IoPencil } from 'react-ico
 import { CiSearch } from 'react-icons/ci';
 import { BsTrash3 } from 'react-icons/bs';
 import { Link } from 'react-router-dom';
-import { v4 as uuidv4 } from 'uuid';
+import ButtonCadastrarFruta from '../ButtonCadastrarFruta';
 
 function FruitList() {
   const [searchTerm, setSearchTerm] = useState('');
@@ -46,6 +46,7 @@ function FruitList() {
   return (
     <div style={style.listContainerStyle}>
       <div style={{ display: 'grid', gridGap: '15px', padding: '5%' }}>
+        <ButtonCadastrarFruta/>
         <div style={style.cardStyleSearch}>
           <CiSearch style={style.iconStyle} />
           <input
