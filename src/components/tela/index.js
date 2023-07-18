@@ -104,11 +104,11 @@ function FruitList() {
                   <IoPencil style={{ marginRight: '5%' }} /> Editar Fruta
                 </Link>
               </div>
-              <div>
+              {/* <div>
                 <a href="#" style={style.linkStyle}>
                   <BsTrash3 style={{ marginRight: '5%' }} /> Excluir Fruta
                 </a>
-              </div>
+              </div> */}
             </div>
           </div>
         </>
