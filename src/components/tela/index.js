@@ -210,7 +210,7 @@ const style = {
     alignItems: 'center',
     height: '80px',
     width: '120px',
-    zIndex: 1000, // Ajuste o valor do zIndex conforme necessário
+    zIndex: 1000
   },
 
 
